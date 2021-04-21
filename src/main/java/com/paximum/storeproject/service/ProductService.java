@@ -3,6 +3,9 @@ package com.paximum.storeproject.service;
 import com.paximum.storeproject.entity.Book;
 import com.paximum.storeproject.entity.Item;
 import com.paximum.storeproject.entity.Product;
+import com.paximum.storeproject.repository.BookRepository;
+import com.paximum.storeproject.repository.FilmRepository;
+import com.paximum.storeproject.repository.MusicAlbumRepository;
 import com.paximum.storeproject.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +21,6 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public Product saveProduct(Product product) {
-        return repository.save(product);
-    }
-
-    public String getProductType(int productId) { return repository.findProductTypeByProductId(productId); }
-
-    public List<Product> saveProducts(List<Product> products) {
-        return repository.saveAll(products);
-    }
-
     public List<Product> getProducts() {
         return repository.findAll();
     }
@@ -36,6 +29,20 @@ public class ProductService {
         return repository.findById(productId).orElse(null);
     }
 
+    public String getProductType(int productId) { return repository.findProductTypeByProductId(productId); }
+
+    /*
+    public List<Product> saveProducts(List<Product> products) {
+        return repository.saveAll(products);
+    }
+
+    public Product saveProduct(Product product) {
+        return repository.save(product);
+    }
+
+     */
+
+
     public List<Product> getProductsByIds(List<Integer> ids) { return repository.findAllByProductIdIn(ids); }
 
     public String deleteProduct(int productId) {
@@ -43,13 +50,12 @@ public class ProductService {
         return "item removed || productId: " + productId;
     }
 
-    //public String getProductType2(int productId) { return repository.findById(productId).orElse(null).getDiscriminatorValue(); }
-
     public float getPricing(int productId) {
         Product product = repository.findById(productId).orElse(null);
         return product.pricing(product.getBasePrice());
     }
 
+    /*
     public Product updateProduct(Product product) {
         Product updatedProduct = repository.findById(product.getProductId()).orElse(null);
         updatedProduct.setName(product.getName());
@@ -59,6 +65,7 @@ public class ProductService {
         //
         return repository.save(updatedProduct);
     }
+     */
 
     public float findLowestPrice(List<Product> products) {
         Product product = products.stream().min((first, second) ->
@@ -120,7 +127,5 @@ public class ProductService {
         }
         return boughtBooks;
     }
-
-    //public void campaign()
 
 }

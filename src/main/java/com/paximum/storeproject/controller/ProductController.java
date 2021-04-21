@@ -16,7 +16,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products")
+    @GetMapping("/list-products")
     public List<Product> getProducts() {
         return productService.getProducts();
     }
@@ -31,40 +31,36 @@ public class ProductController {
         return productService.getProductType(productId);
     }
 
-//    @GetMapping("/productType2/{productId}")
-//    public String getProductType(@PathVariable int productId) {
-////        return productService.getProductType2(productId);
-//    }
-
     @GetMapping("/productPricing/{productId}")
     public float getProductPricing(@PathVariable int productId) {
         return productService.getPricing(productId);
     }
 
+    @PostMapping("/productsByIds")
+    public List<Product> getProductsByIds(@RequestBody List<Integer> ids) {
+        return productService.getProductsByIds(ids);
+    }
+
+    /*
     @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
-
-    @PostMapping("/getProductsByIds")
-    public List<Product> getProductsByIds(@RequestBody List<Integer> ids) {
-        return productService.getProductsByIds(ids);
-    }
-    //get(0).getClass().getSimpleName();
 
     @PostMapping("/addProducts")
     public List<Product> addProducts(@RequestBody List<Product> products) {
         return productService.saveProducts(products);
     }
 
-    @PostMapping("/purchase")
-    public float getTotalPrice(@RequestBody List<Item> items) {
-        return productService.purchase(items);
-    }
-
     @PostMapping("/updateProduct")
     public Product updateProduct(@RequestBody Product product) {
         return productService.updateProduct(product);
+    }
+    */
+
+    @PostMapping("/purchase")
+    public float getTotalPrice(@RequestBody List<Item> items) {
+        return productService.purchase(items);
     }
 
     @DeleteMapping("/deleteProduct/{id}")

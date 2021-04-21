@@ -11,5 +11,5 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query("from Film")
     public List<Film> getFilms();
 
-    public List<Film> findById(int id);
+    //public List<Film> findById(int id);
 }

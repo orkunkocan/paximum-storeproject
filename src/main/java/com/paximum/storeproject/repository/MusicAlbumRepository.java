@@ -11,5 +11,5 @@ public interface MusicAlbumRepository extends JpaRepository<MusicAlbum, Integer>
     @Query("from MusicAlbum")
     public List<MusicAlbum> getMusicAlbums();
 
-    public List<MusicAlbum> findById(int id);
+    //public List<MusicAlbum> findById(int id);
 }
