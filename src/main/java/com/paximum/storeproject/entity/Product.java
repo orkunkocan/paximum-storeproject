@@ -83,32 +83,9 @@ public class Product {
         return basePrice;
     }
 
-    public float pricing2(String type) {
-        float basePrice = getBasePrice();
-        if(type == "film"){
-            return basePrice * 1.15f;
-        }
-        else if(type == "book"){
-            return basePrice + 2.00f;
-        }
-        else if(type == "music_album"){
-            return  basePrice * 0.95f;
-        }
-        else{
-            return basePrice * 1.0f;
-        }
-    }
-
     public float pricing(float basePrice) {
         return basePrice * 1.0f;
     }
-
-//    @Transient
-//    public String getDiscriminatorValue() {
-//        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-//    }
-
-
 
     @Override
     public String toString() {
