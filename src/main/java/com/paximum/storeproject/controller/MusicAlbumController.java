@@ -19,7 +19,7 @@ public class MusicAlbumController {
     @GetMapping("/musicAlbums")
     public List<MusicAlbum> getMusicAlbum() { return musicAlbumService.getMusicAlbums(); }
 
-    @GetMapping("/musicAlbums/{productId}")
+    @GetMapping("/musicAlbum/{productId}")
     public MusicAlbum getMusicAlbumByProductId(@PathVariable int productId) {
         return musicAlbumService.getMusicAlbumById(productId);
     }

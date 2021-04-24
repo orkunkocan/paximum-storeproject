@@ -39,4 +39,6 @@ public class Book extends Product{
     public float pricing(float basePrice) {
         return super.pricing(basePrice) + 2.0f;
     }
+
+
 }

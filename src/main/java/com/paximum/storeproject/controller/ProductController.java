@@ -41,23 +41,6 @@ public class ProductController {
         return productService.getProductsByIds(ids);
     }
 
-    /*
-    @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
-    }
-
-    @PostMapping("/addProducts")
-    public List<Product> addProducts(@RequestBody List<Product> products) {
-        return productService.saveProducts(products);
-    }
-
-    @PostMapping("/updateProduct")
-    public Product updateProduct(@RequestBody Product product) {
-        return productService.updateProduct(product);
-    }
-    */
-
     @PostMapping("/purchase")
     public float getTotalPrice(@RequestBody List<Item> items) {
         return productService.purchase(items);
