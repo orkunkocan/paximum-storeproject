@@ -21,10 +21,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
 @WebMvcTest(BookController.class)
-public class BookControllerTest {
+public class BookControllerTest { //Tests connection layer with MockMvc, Uses Mockito for service
 
     @Autowired
     protected MockMvc mockMvc;
@@ -35,13 +33,11 @@ public class BookControllerTest {
 
     @Before
     public void setUp() {
-        //mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
     public void getBooksTest() throws Exception {
-        //setUp();
         List<Book> bookList = new ArrayList<>();
         bookList.add(
                 new Book("productName1", "productGenre1",
@@ -64,7 +60,6 @@ public class BookControllerTest {
 
     @Test
     public void getBookByIdTest() throws Exception {
-        //setUp();
         Book book = new Book("productName1", "productGenre1",
                         LocalDate.of(2020, 1, 1), 10.0f, "999999999", "testName");
         Mockito.when(bookService.getBookById(1)).thenReturn(book);
@@ -79,7 +74,6 @@ public class BookControllerTest {
 
     @Test
     public void addBookTest() throws Exception {
-        //setUp();
         Book book = new Book("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "999999999", "testName");
         Mockito.when(bookService.addBook(book)).thenReturn(book);
@@ -96,7 +90,6 @@ public class BookControllerTest {
 
     @Test
     public void addBooksTest() throws Exception {
-        //setUp();
         List<Book> bookList = new ArrayList<>();
         bookList.add(
                 new Book("productName1", "productGenre1",
@@ -121,7 +114,6 @@ public class BookControllerTest {
 
     @Test
     public void updateBookTest() throws Exception {
-        //setUp();
         Book updatedBook = new Book("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "999999999", "testName");
         Book book = new Book("productName1", "productGenre1",
@@ -141,7 +133,6 @@ public class BookControllerTest {
 
     @Test
     public void deleteBookTest() throws Exception {
-        //setUp();
         int id = 1;
         Mockito.when(bookService.deleteBook(id)).thenReturn("book deleted");
         String url = "/api/v1/deleteBook/" + id;

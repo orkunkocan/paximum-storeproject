@@ -34,17 +34,20 @@ public class ProductService {
         return "item removed || productId: " + productId;
     }
 
+    //returns pricing of a product baseprice{(Book +=2), (Film *=1.15), (MusicAlbum *=0.95)}
     public float getPricing(int productId) {
         Product product = repository.findById(productId).orElse(null);
         return product.pricing(product.getBasePrice());
     }
 
+    //Finds lowest price in a given product list
     public float findLowestPrice(List<Product> products) {
         Product product = products.stream().min((first, second) ->
                 Float.compare(first.pricing(first.getBasePrice()), second.pricing(second.getBasePrice()))).get();
         return product.pricing(product.getBasePrice());
     }
 
+    //Main purchase operation
     public float purchase(List<Item> items) {
         List<Integer> idList = items.stream().map(Item::getProductId).collect(Collectors.toList());
         List<Product> boughtProducts = getProductsByIds(idList);
@@ -60,6 +63,7 @@ public class ProductService {
         }
     }
 
+    //returns Total price of given products before campaign
     public float getTotalPrice(List<Product> boughtProducts, List<Item> items) {
         float price = 0;
         for(int i = 0; i < boughtProducts.size(); i++) {
@@ -68,23 +72,18 @@ public class ProductService {
         return price;
     }
 
+    //Finds book count in a give product list
     public int getBookCount(List<Product> boughtProducts, List<Item> items) {
         int count = 0;
         for(int i = 0; i < boughtProducts.size(); i++) {
-            System.out.println("initialname: " + boughtProducts.get(i).getClass().getSimpleName());
             if(boughtProducts.get(i) instanceof Book) {
                 count += items.get(i).getCount();
-                System.out.println("loopcount: " + count);
             }
         }
-        System.out.println("bookcount: " + count +
-                ", boughProducts.size: " + boughtProducts.size() +
-                ", getClassName of 0.Item: " + boughtProducts.get(0).getClass().getSimpleName() +
-                ", items.size: " + items.size() +
-                ", itemscount: " + items.get(0).getCount());
         return count;
     }
 
+    //Returns books to find lowest book price from product list
     public List<Product> getBoughtBooks(List<Product> boughtProducts) {
         List<Product> boughtBooks = new ArrayList<Product>();
         for(int i = 0; i < boughtProducts.size(); i++) {

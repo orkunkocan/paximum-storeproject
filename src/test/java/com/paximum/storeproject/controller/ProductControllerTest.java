@@ -24,11 +24,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @WebMvcTest(ProductController.class)
-//@SpringBootTest
-//@WebAppConfiguration
-public class ProductControllerTest {
+public class ProductControllerTest { //Tests connection layer with MockMvc, Uses Mockito for service
 
     @Autowired
     protected MockMvc mockMvc;
@@ -39,13 +39,11 @@ public class ProductControllerTest {
 
     @Before
     public void setUp() {
-        //mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
     public void getProductsTest() throws Exception {
-        setUp();
         List<Product> productList = new ArrayList<>();
         productList.add(
                 new Product(1,"productName1", "productGenre1",
@@ -91,7 +89,6 @@ public class ProductControllerTest {
 
     @Test
     public void getProductByIdTest() throws Exception {
-        //setUp();
         Product product = new Product(1, "productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f);
         Mockito.when(productService.getProductById(1)).thenReturn(product);
@@ -106,7 +103,6 @@ public class ProductControllerTest {
 
     @Test
     public void getProductTypeByIdTest() throws Exception {
-        //setUp();
         int id = 1;
         Mockito.when(productService.getProductType(id)).thenReturn("productType");
         String url = "/api/v1/productType/1";
@@ -118,7 +114,6 @@ public class ProductControllerTest {
 
     @Test
     public void getProductPricingTest() throws Exception {
-        //setUp();
         Product product = new Product(1, "productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f);
         Mockito.when(productService.getPricing(product.getProductId()))
@@ -132,7 +127,6 @@ public class ProductControllerTest {
 
     @Test
     public void getProductsByIdsTest() throws Exception {
-        //setUp();
         List<Product> productList = new ArrayList<>();
         productList.add(
                 new Product(1,"productName1", "productGenre1",
@@ -159,7 +153,6 @@ public class ProductControllerTest {
 
     @Test
     public void getTotalPriceTest() throws Exception {
-        //setUp();
         List<Item> items = new ArrayList<>();
         items.add(new Item(1,1));
         Product product = new Product(1, "productName1", "productGenre1",
@@ -177,7 +170,6 @@ public class ProductControllerTest {
 
     @Test
     public void deleteProductTest() throws Exception {
-        //setUp();
         int id = 1;
         Mockito.when(productService.deleteProduct(id)).thenReturn("item removed || productId: " + id);
         String url = "/api/v1/deleteProduct/" + id;
@@ -186,7 +178,7 @@ public class ProductControllerTest {
                 .andReturn();
         String result = mvcResult.getResponse().getContentAsString();
         System.out.println("result: " + result);
-        //Mockito.verify(bookRepository, Mockito.times(1)).deleteById(id);
+        //verify(productRepository, times(1)).deleteById(id);
     }
 
 }

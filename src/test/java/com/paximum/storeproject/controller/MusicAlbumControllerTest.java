@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @WebMvcTest(MusicAlbumController.class)
-public class MusicAlbumControllerTest {
+public class MusicAlbumControllerTest { //Tests connection layer with MockMvc, Uses Mockito for service
 
     @Autowired
     protected MockMvc mockMvc;
@@ -33,13 +33,11 @@ public class MusicAlbumControllerTest {
 
     @Before
     public void setUp() {
-        //mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
     public void getMusicAlbumsTest() throws Exception {
-        setUp();
         List<MusicAlbum> musicAlbumList = new ArrayList<>();
         musicAlbumList.add(
                 new MusicAlbum("productName1", "productGenre1",
@@ -61,7 +59,6 @@ public class MusicAlbumControllerTest {
 
     @Test
     public void getMusicAlbumByIdTest() throws Exception {
-        //setUp();
         MusicAlbum musicAlbum = new MusicAlbum("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 12);
         Mockito.when(musicAlbumService.getMusicAlbumById(1)).thenReturn(musicAlbum);
@@ -76,7 +73,6 @@ public class MusicAlbumControllerTest {
 
     @Test
     public void addMusicAlbumTest() throws Exception {
-        //setUp();
         MusicAlbum musicAlbum = new MusicAlbum("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 12);
         Mockito.when(musicAlbumService.addMusicAlbum(musicAlbum)).thenReturn(musicAlbum);
@@ -93,7 +89,6 @@ public class MusicAlbumControllerTest {
 
     @Test
     public void addMusicAlbumsTest() throws Exception {
-        //setUp();
         List<MusicAlbum> musicAlbumList = new ArrayList<>();
         musicAlbumList.add(
                 new MusicAlbum("productName1", "productGenre1",
@@ -118,7 +113,6 @@ public class MusicAlbumControllerTest {
 
     @Test
     public void updateMusicAlbumTest() throws Exception {
-        //setUp();
         MusicAlbum updatedMusicAlbum = new MusicAlbum("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 12);
         MusicAlbum musicAlbum = new MusicAlbum("productName1", "productGenre1",
@@ -138,7 +132,6 @@ public class MusicAlbumControllerTest {
 
     @Test
     public void deleteMusicAlbumTest() throws Exception {
-        //setUp();
         int id = 1;
         Mockito.when(musicAlbumService.deleteMusicAlbum(id)).thenReturn("musicAlbum deleted");
         String url = "/api/v1/deleteMusicAlbum/" + id;

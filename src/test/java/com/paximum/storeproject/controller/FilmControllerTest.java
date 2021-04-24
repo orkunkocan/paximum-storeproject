@@ -21,7 +21,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 @WebMvcTest(FilmController.class)
-public class FilmControllerTest {
+public class FilmControllerTest { //Tests connection layer with MockMvc, Uses Mockito for service
 
     @Autowired
     protected MockMvc mockMvc;
@@ -32,13 +32,11 @@ public class FilmControllerTest {
 
     @Before
     public void setUp() {
-        //mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
     public void getFilmsTest() throws Exception {
-        setUp();
         List<Film> filmList = new ArrayList<>();
         filmList.add(
                 new Film("productName1", "productGenre1",
@@ -60,7 +58,6 @@ public class FilmControllerTest {
 
     @Test
     public void getFilmByIdTest() throws Exception {
-        //setUp();
         Film film = new Film("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 10.0f);
         Mockito.when(filmService.getFilmById(1)).thenReturn(film);
@@ -75,7 +72,6 @@ public class FilmControllerTest {
 
     @Test
     public void addFilmTest() throws Exception {
-        //setUp();
         Film film = new Film("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 10.0f);
         Mockito.when(filmService.addFilm(film)).thenReturn(film);
@@ -92,7 +88,6 @@ public class FilmControllerTest {
 
     @Test
     public void addFilmsTest() throws Exception {
-        //setUp();
         List<Film> filmList = new ArrayList<>();
         filmList.add(
                 new Film("productName1", "productGenre1",
@@ -117,7 +112,6 @@ public class FilmControllerTest {
 
     @Test
     public void updateFilmTest() throws Exception {
-        //setUp();
         Film updatedFilm = new Film("productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f, "testName", 10.0f);
         Film film = new Film("productName1", "productGenre1",
@@ -137,7 +131,6 @@ public class FilmControllerTest {
 
     @Test
     public void deleteFilmTest() throws Exception {
-        //setUp();
         int id = 1;
         Mockito.when(filmService.deleteFilm(id)).thenReturn("film deleted");
         String url = "/api/v1/deleteFilm/" + id;

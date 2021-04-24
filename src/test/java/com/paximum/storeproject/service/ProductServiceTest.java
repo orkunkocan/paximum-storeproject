@@ -21,7 +21,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class ProductServiceTest {
+public class ProductServiceTest { // Tests Service layer while mocking database
 
     @Autowired
     private ProductService productService;
@@ -42,7 +42,7 @@ public class ProductServiceTest {
                 new Product(3,"productName3", "productGenre3",
                         LocalDate.of(2020, 3, 3), 20.0f));
         Mockito.when(productRepository.findAll()).thenReturn(productList);
-        assertEquals(3, productService.getProducts().size());
+        assertEquals(productList.size(), productService.getProducts().size());
     }
 
     @Test
@@ -50,8 +50,8 @@ public class ProductServiceTest {
         Product product = new Product(1, "productName1", "productGenre1",
                 LocalDate.of(2020, 1, 1), 10.0f);
 
-        Mockito.when(productRepository.findById(1)).thenReturn(java.util.Optional.of(product));
-        assertEquals(product, productService.getProductById(1));
+        Mockito.when(productRepository.findById(product.getProductId())).thenReturn(java.util.Optional.of(product));
+        assertEquals(product, productService.getProductById(product.getProductId()));
     }
 
     @Test

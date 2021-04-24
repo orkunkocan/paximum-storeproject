@@ -17,7 +17,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class FilmServiceTest {
+public class FilmServiceTest { // Tests Service layer while mocking database
     @Autowired
     FilmService filmService;
     @MockBean

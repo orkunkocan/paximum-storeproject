@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class BookServiceTest {
+public class BookServiceTest { // Tests Service layer while mocking database
 
     @Autowired
     BookService bookService;

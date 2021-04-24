@@ -1,8 +1,6 @@
 package com.paximum.storeproject.service;
 
-import com.paximum.storeproject.entity.Book;
 import com.paximum.storeproject.entity.MusicAlbum;
-import com.paximum.storeproject.repository.BookRepository;
 import com.paximum.storeproject.repository.MusicAlbumRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +17,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class MusicAlbumServiceTest {
+public class MusicAlbumServiceTest { // Tests Service layer while mocking database
     @Autowired
     MusicAlbumService musicAlbumService;
     @MockBean
