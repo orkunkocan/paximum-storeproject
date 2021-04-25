@@ -3,7 +3,7 @@ A simple springboot-webapi project with unit tests.
 
 ## Build and Test
 
-* From the root of the repository, use `db_initialize.sql` to initialize and populate the database.
+* From the root of the repository, use `db_initialize.sql` to initialize and populate the mysql database.
 * Correct the below fields in `src\main\resources\application.properties`.
   * spring.datasource.url=jdbc:mysql://localhost:3306/paximum_project 
   * spring.datasource.username=username
