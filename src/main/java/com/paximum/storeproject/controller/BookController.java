@@ -1,5 +1,6 @@
 package com.paximum.storeproject.controller;
 
+import com.paximum.storeproject.dto.BookDto;
 import com.paximum.storeproject.entity.Book;
 import com.paximum.storeproject.entity.Product;
 import com.paximum.storeproject.service.BookService;
@@ -18,9 +19,17 @@ public class BookController {
     @GetMapping("/books")
     public List<Book> getBooks() { return bookService.getBooks(); }
 
+    @GetMapping("/admin-books")
+    public List<Book> getAdminBooks() { return bookService.getBooks(); }
+
     @GetMapping("/book/{productId}")
     public Book getBookByProductId(@PathVariable int productId) {
         return bookService.getBookById(productId);
+    }
+
+    @GetMapping("/book-dto/{productId}")
+    public BookDto getBookDtoByProductId(@PathVariable int productId) {
+        return bookService.getBookDtoById(productId);
     }
 
     @PostMapping("/addBook")

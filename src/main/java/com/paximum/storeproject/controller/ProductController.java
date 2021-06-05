@@ -1,5 +1,6 @@
 package com.paximum.storeproject.controller;
 
+import com.paximum.storeproject.dto.ProductDto;
 import com.paximum.storeproject.entity.Item;
 import com.paximum.storeproject.entity.Product;
 import com.paximum.storeproject.service.ProductService;
@@ -19,6 +20,11 @@ public class ProductController {
     @GetMapping("/list-products")
     public List<Product> getProducts() {
         return productService.getProducts();
+    }
+
+    @GetMapping("/list-products-dto")
+    public List<ProductDto> getProductsDto() {
+        return productService.getProductsDto();
     }
 
     @GetMapping("/product/{productId}")

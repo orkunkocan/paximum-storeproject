@@ -1,5 +1,7 @@
 package com.paximum.storeproject.service;
 
+import com.paximum.storeproject.converter.BookConverter;
+import com.paximum.storeproject.dto.BookDto;
 import com.paximum.storeproject.entity.Book;
 import com.paximum.storeproject.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,18 @@ import java.util.List;
 public class BookService {
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    BookConverter bookConverter;
 
     public List<Book> getBooks() {
         return bookRepository.getBooks();
     }
 
     public Book getBookById(int id) { return bookRepository.findById(id).orElse(null); }
+
+    public BookDto getBookDtoById(int id) {
+        return bookConverter.entityToDto(bookRepository.findById(id).orElse(null));
+    }
 
     public Book addBook(Book book) {
         return bookRepository.save(book);
